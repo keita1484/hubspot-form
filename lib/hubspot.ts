@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 export const submitHubspotForm = async (email: string, firstname: string, lastname: string, msg: string) => {
-  const portalId = '20536962'
-  const formId = '23c091f6-32ab-4d82-ac44-24005e743ac2'
+  const portalId = process.env.NEXT_PUBLIC_PORTAL_Id
+  const formId = process.env.NEXT_PUBLIC_FORM_Id
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`
 
   const config = {
