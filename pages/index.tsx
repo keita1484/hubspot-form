@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Image from 'next/image'
 import Router from 'next/router'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { submitHubspotForm } from '../lib/hubspot'
@@ -47,8 +48,8 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-wrap w-full relative">
-      <div className="w-3/5 px-20 py-10">
+    <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="grid gap-10 lg:grid-cols-2">
         <div className="table mx-autow-16 mt-28">
           <h1 className="font-mono text-3xl font-medium table">Contact Us</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white shadow-md rounded-lg">
@@ -113,9 +114,18 @@ export default function Home() {
             </div>
           </form>
         </div>
-      </div>
-      <div className="w-2/5 text-right">
-        <img src="/images/mcycle.jpg" className="ml-auto h-screen object-cover" />
+        <div className="mt-14 sm:mt-28">
+          <Image 
+            src="/images/mcycle2.jpg"
+            width={1142}
+            height={726}
+            className="object-cover w-full h-62 rounded shadow-lg sm:h-98"
+            sizes={"100vh"}
+            quality={80}
+            unoptimized={false}
+            objectFit={"cover"}
+          />
+        </div>
       </div>
     </div>
   )
