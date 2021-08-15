@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Router from 'next/router'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { submitHubspotForm } from '../lib/hubspot'
@@ -15,7 +15,7 @@ export default function Home() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful }
+    formState
   } = useForm<Input>({
     criteriaMode: "all",
     shouldFocusError: false,
@@ -27,10 +27,12 @@ export default function Home() {
     }
   })
   const router = Router
+  useEffect(() => {},[formState]);
 
   const onSubmit: SubmitHandler<Input> = async(data) => {
     const hubspot_reaponse = await submitHubspotForm(data.email, data.firstName, data.lastName, data.msg)
-    console.log(hubspot_reaponse)
+    const isSubmitSuccessful = formState.isSubmitSuccessful
+
     if (isSubmitSuccessful) {
       reset({
         email: '',
@@ -62,7 +64,7 @@ export default function Home() {
                     required: true
                   })}
                 />
-                <p className="text-xs text-red-600 pt-2">{errors.firstName && "A first name is required."}</p>
+                <p className="text-xs text-red-600 pt-2">{formState.errors.firstName && "A first name is required."}</p>
               </div>
               <div className="w-full px-3 mb-6 md:w-1/2 md:mb-0">
                 <label className="text-base leading-7 text-blueGray-500">Last name</label>
@@ -75,7 +77,7 @@ export default function Home() {
                     required: true
                   })}
                 />
-                <p className="text-xs text-red-600 pt-2">{errors.lastName && "A last name is required."}</p>
+                <p className="text-xs text-red-600 pt-2">{formState.errors.lastName && "A last name is required."}</p>
               </div>
             </div>
             <div className="flex flex-wrap mb-5 -mx-3">
@@ -88,7 +90,7 @@ export default function Home() {
                     required: true
                   })}
                 />
-                <p className="text-xs text-red-600 pt-2">{errors.msg && "A message is required."}</p>
+                <p className="text-xs text-red-600 pt-2">{formState.errors.msg && "A message is required."}</p>
               </div>
             </div>
             <div className="flex flex-wrap mb-2 -mx-3">
@@ -102,7 +104,7 @@ export default function Home() {
                     required: true
                   })}
                 />
-                <p className="text-xs text-red-600 pt-2">{errors.email && "A email is required."}</p>
+                <p className="text-xs text-red-600 pt-2">{formState.errors.email && "A email is required."}</p>
               </div>
             </div>
             <div className="flex items-center w-full pt-4">
