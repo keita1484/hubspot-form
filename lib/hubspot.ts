@@ -41,6 +41,6 @@ export const submitHubspotForm = async (email: string, firstname: string, lastna
     return res;
   } catch(err) {
     const errorMessage = err.response.data || err.message;
-    console.log(errorMessage);
+    return errorMessage
   }
 }
